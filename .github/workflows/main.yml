@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Streamlit CI/CD
 
 on:
   push:
@@ -16,10 +16,13 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: "3.10"
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Check app
+      - name: Check Python files
         run: python -m py_compile app.py
+
+      - name: Test Streamlit app
+        run: streamlit run app.py --server.headless true &
