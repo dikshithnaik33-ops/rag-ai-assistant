@@ -25,4 +25,4 @@ jobs:
         run: python -m py_compile app.py
 
       - name: Test Streamlit app
-        run: streamlit run app.py --server.headless true &
+        run: streamlit run app.py --server.headless true --server.port 8501 &
