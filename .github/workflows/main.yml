@@ -1,28 +1,26 @@
-name: Streamlit CI/CD
+name: CI Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
 
-      - name: Check Python files
-        run: python -m py_compile app.py
-
-      - name: Test Streamlit app
-        run: streamlit run app.py --server.headless true --server.port 8501 &
+    - name: Run app test
+      run: |
+        python main.py
